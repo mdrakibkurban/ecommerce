@@ -24,8 +24,14 @@
 <script src="{{asset("/admin/plugins/summernote/summernote-bs4.min.js")}}"></script>
 <!-- overlayScrollbars -->
 <script src="{{asset("/admin/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js")}}"></script>
+<!-- bs-custom-file-input -->
+<script src="{{asset("/admin/plugins/bs-custom-file-input/bs-custom-file-input.min.js")}}"></script>
 <!-- AdminLTE App -->
 <script src="{{asset("/admin/dist/js/adminlte.js")}}"></script>
+
+<!-- Select2 -->
+<script src="{{asset("/admin/plugins/select2/js/select2.full.min.js")}}"></script>
+
 <!-- DataTables -->
 <script src="http://cdn.datatables.net/1.13.1/js/jquery.dataTables.min.js"></script>
 {{-- toggle.js --}}
@@ -37,8 +43,16 @@
 <script>
   $(document).ready( function () {
       $('#myTable').DataTable();
+      $('#category_id').select2();
   });
 </script>
+
+<script>
+  $(function () {
+    $('#summernote').summernote()
+  })
+</script>
+
 <script>
   $.ajaxSetup({
       headers: {

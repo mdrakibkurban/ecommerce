@@ -23,6 +23,8 @@ class CategorySeeder extends Seeder
                 'section_id' => rand(1,3),
                 'name'       => $facker->unique()->name,
                 'slug'       => Str::slug($facker->unique()->name),
+                'image'      => '',
+                'url'        => Str::slug($facker->unique()->name),
                 'status'     => $this->randomStatus()
             ]);
         }

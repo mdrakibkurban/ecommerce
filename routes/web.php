@@ -4,7 +4,7 @@ use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Admin\Auth\ProfileController as AuthProfileController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
-
+use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -52,6 +52,10 @@ Route::prefix('admin')->name('admin.')->middleware(['admin'])->group(function ()
 
     Route::resource('categories', CategoryController::class);
     Route::get('/category/status', [CategoryController::class,'status'])->name('category.status');
+
+    Route::resource('products', ProductController::class);
+    Route::get('/product/status', [ProductController::class,'status'])->name('product.status');
+    Route::get('/get/category', [ProductController::class,'getCategory'])->name('get.category');
 });
 
 ;

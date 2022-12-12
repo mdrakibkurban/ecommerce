@@ -8,6 +8,8 @@ use App\Models\Category;
 use Brian2694\Toastr\Facades\Toastr;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class CategoryController extends Controller
 {
@@ -45,14 +47,32 @@ class CategoryController extends Controller
             'name'       => 'required|string|unique:categories,name',
             'section_id' => 'required',
             'status'     => 'required',
+            'image'      => 'required|image',
+            'url'        => 'required',
         ]);
 
+        if($request->hasFile('image')){
+            $image = $request->file('image');
+            $image_ex =  $image->getClientOriginalExtension();
+            $file_path = date('ymdhis').'.'.$image_ex;
+            Image::make($image)->resize(399, 467); 
+            $image->storeAs('category_images', $file_path,'public');
+        }else{
+            $file_path =  null;
+        }
+
         try {
-            $category             = new Category();
-            $category->name       = $request->name;
-            $category->slug       = Str::slug($request->name);
-            $category->section_id = $request->section_id;
-            $category->status     = $request->status;
+            $category                   = new Category();
+            $category->name             = $request->name;
+            $category->slug             = Str::slug($request->name);
+            $category->section_id       = $request->section_id;
+            $category->status           = $request->status;
+            $category->url              = $request->url;
+            $category->discount         = $request->discount;
+            $category->meta_title       = $request->meta_title;
+            $category->meta_description = $request->meta_description;
+            $category->meta_keyword     = $request->meta_keyword;
+            $category->image            = $file_path;
             $category->save();
             Toastr::success('Category Create successfuly', 'success', ["positionClass" => "toast-top-right",  "closeButton"=> true,   "progressBar"=> true,]);
             return redirect()->route('admin.categories.index');
@@ -105,14 +125,35 @@ class CategoryController extends Controller
             'name'=>'required|string|unique:categories,name,'.$id,
             'section_id' => 'required',
             'status'     => 'required',
+            'image'      => 'required|image|sometimes',
+            'url'        => 'required',
         ]);
 
-        try {
-            $category             = Category::find($id);
-            $category->name       = $request->name;
-            $category->slug       = Str::slug($request->name);
-            $category->section_id = $request->section_id;
-            $category->status     = $request->status;
+        $category   = Category::find($id);
+
+        if($request->hasFile('image')){
+            if ($category->image) {
+                Storage::delete('public/category_images/'.$category->image);
+            }
+            $image = $request->file('image');
+            $image_ex =  $image->getClientOriginalExtension();
+            $file_path = date('ymdhis').'.'.$image_ex;
+            Image::make($image)->resize(399, 467); 
+            $image->storeAs('category_images', $file_path,'public');
+        }else{
+            $file_path =  $category->image;
+        }
+
+        try {   
+            $category->name             = $request->name;
+            $category->slug             = Str::slug($request->name);
+            $category->section_id       = $request->section_id;
+            $category->url              = $request->url;
+            $category->discount         = $request->discount;
+            $category->meta_title       = $request->meta_title;
+            $category->meta_description = $request->meta_description;
+            $category->meta_keyword     = $request->meta_keyword;
+            $category->image            = $file_path;
             $category->save();
             Toastr::success('Category Update successfuly', 'success', ["positionClass" => "toast-top-right",  "closeButton"=> true,   "progressBar"=> true,]);
             return redirect()->route('admin.categories.index');
@@ -135,10 +176,13 @@ class CategoryController extends Controller
         $category = Category::find($id);
         if(!$category){
           return errors_response('Data not found');
-        }
-
-        $category->delete();
-        return success_response('Category Delete Successfully'); 
+        }else{
+           if($category->image) {
+                Storage::delete('public/category_images/'.$category->image);
+            }
+            $category->delete();
+            return success_response('Category Delete Successfully'); 
+        }     
     }
 
 
