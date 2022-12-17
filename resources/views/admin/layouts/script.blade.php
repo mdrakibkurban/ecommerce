@@ -29,6 +29,10 @@
 <!-- AdminLTE App -->
 <script src="{{asset("/admin/dist/js/adminlte.js")}}"></script>
 
+<!-- jquery-validation -->
+<script src="{{asset("/admin/plugins/jquery-validation/jquery.validate.min.js")}}"></script>
+<script src="{{asset("/admin/plugins/jquery-validation/additional-methods.min.js")}}"></script>
+
 <!-- Select2 -->
 <script src="{{asset("/admin/plugins/select2/js/select2.full.min.js")}}"></script>
 

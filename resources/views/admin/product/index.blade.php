@@ -34,7 +34,7 @@
                 <th>Section</th>
                 <th>Category</th>
                 <th>Status</th>
-                <th style="width: 100px">Action</th>
+                <th style="width: 130px">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -42,8 +42,8 @@
                 <tr id="ids{{$row->id}}">
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $row->name }}</td>
-                    <th><img width="50px" src="{{(!empty($row->featured_image)) ? 
-                    asset("storage/product_featured_images/".$row->featured_image) : asset('/upload/extra.jpg')}}" alt=""></th>
+                    <td><img width="50px" src="{{(!empty($row->featured_image)) ? 
+                    asset("storage/product_featured_images/".$row->featured_image) : asset('/upload/extra.jpg')}}" alt=""></td>
                     <td>{{ $row->code }}</td>
                     <td>{{ App\Enums\Section::getDescription($row->section_id) }}</td>
                     <td>{{ $row->category->name }}</td>
@@ -52,9 +52,16 @@
                         data-size="small" data-width="85" data-onstyle="success" data-offstyle="danger" {{ $row->status === 1 ? 'checked' : ''}}>
                     </td>
                     <td>
-                        <a href="{{ route('admin.products.edit',$row->slug)}}" class="btn btn-warning btn-sm">Edit</a>
-                        <button class="btn btn-danger btn-sm" id="productDelete"
-                        data-id ="{{$row->id}}">Delete</button>  
+                        <a title="Add-Attribute" href="{{ route('admin.product-attributes',$row->id) }}" class="btn btn-success btn-sm"><i class="fas fa-plus"></i></a>
+
+                        <a title="Add-Images" href="{{ route('admin.product-images',$row->id) }}" class="btn btn-info btn-sm"><i class="fas fa-images"></i></a>
+
+
+                        <a title="Edit" href="{{ route('admin.products.edit',$row->slug) }}" 
+                        class="btn btn-warning btn-sm text-white"><i class="fas fa-edit"></i></a>
+
+                        <button title="Delete" class="btn btn-danger btn-sm" id="productDelete"
+                        data-id ="{{$row->id}}"><i class="fas fa-trash"></i></button>  
                     </td>
                   </tr> 
                 @endforeach

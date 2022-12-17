@@ -34,7 +34,7 @@
     <div class="row">
         <div class="form-group col-md-6">
           <label for="name">Product Name</label>
-          <input type="text" class="form-control" name="name" value="{{ $product->name }}" id="name" placeholder="Enter Name">
+          <input type="text" class="form-control" name="name" value="{{ $product->name }}" id="name">
           @error('name')
                <span style="color: red">{{ $message }}</span>
            @enderror
@@ -42,7 +42,7 @@
 
         <div class="form-group col-md-6">
             <label for="code">Product Code</label>
-            <input type="text" class="form-control" name="code" value="{{ $product->code }}" id="code" placeholder="Enter Code">
+            <input type="text" class="form-control" name="code" value="{{ $product->code }}" id="code">
             @error('code')
                  <span style="color: red">{{ $message }}</span>
              @enderror
@@ -80,15 +80,40 @@
 
         <div class="form-group col-md-6">
           <label for="discount">Product Discount</label>
-          <input type="number" class="form-control" name="discount" value="{{ $product->discount }}" id="url" placeholder="Enter discount">
+          <input type="number" class="form-control" name="discount" value="{{ $product->discount }}" id="url">
         </div>
 
         <div class="form-group col-md-6">
           <label for="url">Product Url</label>
-          <input type="text" class="form-control" name="url" value="{{ $product->url }}" id="url" placeholder="Enter url">
+          <input type="text" class="form-control" name="url" value="{{ $product->url }}" id="url">
           @error('url')
                <span style="color: red">{{ $message }}</span>
            @enderror
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="color">Product Color</label>
+          <input type="text" class="form-control" name="color" value="{{ $product->color }}" id="color">
+          @error('color')
+               <span style="color: red">{{ $message }}</span>
+           @enderror
+        </div>
+
+        <div class="form-group col-md-6">
+          <div class="row">
+            <div class="col-md-6">
+             <label for="featured_image">Product Featured Image</label>
+             <input type="file" name="featured_image" id="featured_image" class="form-control">
+             @error('featured_image')
+             <span style="color: red">{{ $message }}</span>
+             @enderror
+            </div>
+
+            <div class="col-md-6">
+             <img src="{{(!empty($product->featured_image)) ? 
+               asset("storage/product_featured_images/".$product->featured_image) : asset('/upload/extra.jpg')}}" id="showImage" style="width: 100px;">
+            </div>
+          </div>
         </div>
 
         <div class="form-group col-md-12">
@@ -120,22 +145,7 @@
           </textarea>
         </div>
         
-        <div class="form-group col-md-6">
-           <div class="row">
-             <div class="col-md-6">
-              <label for="featured_image">Product Featured Image</label>
-              <input type="file" name="featured_image" id="featured_image" class="form-control">
-              @error('featured_image')
-              <span style="color: red">{{ $message }}</span>
-              @enderror
-             </div>
-
-             <div class="col-md-6">
-              <img src="{{(!empty($product->featured_image)) ? 
-                asset("storage/product_featured_images/".$product->featured_image) : asset('/upload/extra.jpg')}}" id="showImage" style="width: 100px;">
-             </div>
-           </div>
-        </div>
+      
 
         <div class="form-group col-md-6">
           <label for="status">Product Status</label><br>

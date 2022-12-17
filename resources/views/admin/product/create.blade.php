@@ -82,6 +82,30 @@
            @enderror
         </div>
 
+        <div class="form-group col-md-6">
+          <label for="color">Product Color</label>
+          <input type="text" class="form-control" name="color" value="{{ old('color')}}" id="color" placeholder="Enter color">
+          @error('color')
+               <span style="color: red">{{ $message }}</span>
+           @enderror
+        </div>
+
+        <div class="form-group col-md-6">
+          <div class="row">
+            <div class="col-md-6">
+             <label for="featured_image">Product Featured Image</label>
+             <input type="file" name="featured_image" id="featured_image" class="form-control">
+             @error('featured_image')
+             <span style="color: red">{{ $message }}</span>
+             @enderror
+            </div>
+
+            <div class="col-md-6">
+             <img src="" id="showImage" style="width: 100px;">
+            </div>
+          </div>
+         </div>
+
         <div class="form-group col-md-12">
             <label for="description">Product Description</label>
             <textarea id="summernote" name="description"></textarea>
@@ -105,21 +129,7 @@
           <textarea name="meta_keyword" id="meta_keyword" rows="3" class="form-control"></textarea>
         </div>
         
-        <div class="form-group col-md-6">
-           <div class="row">
-             <div class="col-md-6">
-              <label for="featured_image">Product Featured Image</label>
-              <input type="file" name="featured_image" id="featured_image" class="form-control">
-              @error('featured_image')
-              <span style="color: red">{{ $message }}</span>
-              @enderror
-             </div>
-
-             <div class="col-md-6">
-              <img src="" id="showImage" style="width: 100px;">
-             </div>
-           </div>
-        </div>
+     
 
         <div class="form-group col-md-6">
           <label for="status">Product Status</label><br>
