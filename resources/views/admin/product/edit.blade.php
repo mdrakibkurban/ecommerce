@@ -78,8 +78,16 @@
             @enderror
           </div>
 
+          <div class="form-group col-md-6">
+            <label for="price">Product Price</label>
+            <input type="number" class="form-control" name="price" value="{{ $product->price }}" id="price" placeholder="Enter Price">
+            @error('price')
+                 <span style="color: red">{{ $message }}</span>
+             @enderror
+          </div>
+
         <div class="form-group col-md-6">
-          <label for="discount">Product Discount</label>
+          <label for="discount">Product Discount(%)</label>
           <input type="number" class="form-control" name="discount" value="{{ $product->discount }}" id="url">
         </div>
 
@@ -87,14 +95,6 @@
           <label for="url">Product Url</label>
           <input type="text" class="form-control" name="url" value="{{ $product->url }}" id="url">
           @error('url')
-               <span style="color: red">{{ $message }}</span>
-           @enderror
-        </div>
-
-        <div class="form-group col-md-6">
-          <label for="color">Product Color</label>
-          <input type="text" class="form-control" name="color" value="{{ $product->color }}" id="color">
-          @error('color')
                <span style="color: red">{{ $message }}</span>
            @enderror
         </div>

@@ -64,7 +64,7 @@ class ProductController extends Controller
             $product->status           = $request->status;
             $product->discount         = $request->discount;
             $product->url              = $request->url;
-            $product->color            = $request->color;
+            $product->price            = $request->price;
             $product->description      = $request->description;
             $product->code             = $request->code;
             $product->meta_title       = $request->meta_title;
@@ -124,7 +124,7 @@ class ProductController extends Controller
             'section_id'     => 'required',
             'category_id'    => 'required',
             'status'         => 'required',
-            'color'          => 'required',
+            'price'          => 'required',
             'featured_image' => 'required|image|sometimes',
             'url'            => 'required',
             'code'           => 'required|unique:products,code,'.$id,
@@ -154,7 +154,7 @@ class ProductController extends Controller
             $product->status           = $request->status;
             $product->discount         = $request->discount;
             $product->url              = $request->url;
-            $product->color            = $request->color;
+            $product->price            = $request->price;
             $product->description      = $request->description;
             $product->code             = $request->code;
             $product->meta_title       = $request->meta_title;

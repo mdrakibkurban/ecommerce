@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('slug');
             $table->string('featured_image');
             $table->string('url');
+            $table->string('price');
             $table->string('code')->unique();
             $table->double('discount')->nullable();
             $table->longText('description')->nullable();

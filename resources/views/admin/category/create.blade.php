@@ -51,7 +51,7 @@
         </div>
 
         <div class="form-group col-md-6">
-          <label for="discount">Category Discount</label>
+          <label for="discount">Category Discount(%)</label>
           <input type="number" class="form-control" name="discount" value="{{ old('discount')}}" id="url" placeholder="Enter discount">
         </div>
 

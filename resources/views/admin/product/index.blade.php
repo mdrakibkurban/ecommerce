@@ -30,6 +30,7 @@
                 <th style="width: 20px">#Sl</th>
                 <th>Name</th>
                 <th>Image</th>
+                <th>price</th>
                 <th>Code</th>
                 <th>Section</th>
                 <th>Category</th>
@@ -44,6 +45,7 @@
                     <td>{{ $row->name }}</td>
                     <td><img width="50px" src="{{(!empty($row->featured_image)) ? 
                     asset("storage/product_featured_images/".$row->featured_image) : asset('/upload/extra.jpg')}}" alt=""></td>
+                    <td>{{ $row->price }}</td>
                     <td>{{ $row->code }}</td>
                     <td>{{ App\Enums\Section::getDescription($row->section_id) }}</td>
                     <td>{{ $row->category->name }}</td>

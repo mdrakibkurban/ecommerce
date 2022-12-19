@@ -31,7 +31,7 @@ class ProductRequest extends FormRequest
                 'featured_image' => 'required|image',
                 'url'            => 'required',
                 'code'           => 'required',
-                'color'          => 'required',
+                'price'          => 'required',
                 'description'    => 'required',
         ];
     }

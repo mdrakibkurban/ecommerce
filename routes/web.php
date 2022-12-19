@@ -2,11 +2,13 @@
 
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Admin\Auth\ProfileController as AuthProfileController;
+use App\Http\Controllers\Admin\BannerController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductAttributeController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductImageController;
+use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,11 +23,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-
+Route::get('/', [HomeController::class,'index']);
 
 Route::get('/dashboard', function () {
     return view('dashboard');
@@ -67,6 +65,8 @@ Route::prefix('admin')->name('admin.')->middleware(['admin'])->group(function ()
     Route::get('/product-images/{id}',[ProductImageController::class,'addProductImg'])->name('product-images');
     Route::post('/product-images/store',[ProductImageController::class,'storeProductImg'])->name('product-images.store');
     Route::delete('/product-images/delete/{id}',[ProductImageController::class,'DeleteProductImg']);
+
+    Route::resource('banners', BannerController::class);
 });
 
 ;

@@ -69,8 +69,16 @@
             @enderror
           </div>
 
+          <div class="form-group col-md-6">
+            <label for="price">Product Price</label>
+            <input type="number" class="form-control" name="price" value="{{ old('price')}}" id="price" placeholder="Enter Price">
+            @error('price')
+                 <span style="color: red">{{ $message }}</span>
+             @enderror
+          </div>
+
         <div class="form-group col-md-6">
-          <label for="discount">Product Discount</label>
+          <label for="discount">Product Discount(%)</label>
           <input type="number" class="form-control" name="discount" value="{{ old('discount')}}" id="url" placeholder="Enter discount">
         </div>
 
@@ -82,13 +90,6 @@
            @enderror
         </div>
 
-        <div class="form-group col-md-6">
-          <label for="color">Product Color</label>
-          <input type="text" class="form-control" name="color" value="{{ old('color')}}" id="color" placeholder="Enter color">
-          @error('color')
-               <span style="color: red">{{ $message }}</span>
-           @enderror
-        </div>
 
         <div class="form-group col-md-6">
           <div class="row">
