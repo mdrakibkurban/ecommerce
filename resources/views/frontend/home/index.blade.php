@@ -2,6 +2,7 @@
 use App\Models\Product;
 ?>
 @extends('frontend.layouts.app')
+@section('title','Home Page')
 @section('content')
 <div class="banner-grid">
 	<div id="visual">
@@ -192,14 +193,14 @@ use App\Models\Product;
 									<img src="{{asset("/storage/product_featured_images/$product->featured_image")}}" alt="" class="pro-image-back">
 										<div class="men-cart-pro">
 											<div class="inner-men-cart-pro">
-												<a href="single.html" class="link-product-add-cart">Quick View</a>
+												<a href="{{ route('single', ['category' => $product->category->slug ,'slug' => $product->slug])}}" class="link-product-add-cart">Quick View</a>
 											</div>
 										</div>
 										<span class="product-new-top">New</span>
 										
 								</div>
 								<div class="item-info-product ">
-									<h4><a href="single.html">{{$product->name}}</a></h4>
+									<h4><a href="{{ route('single', ['category' => $product->category->slug ,'slug' => $product->slug])}}">{{ Str::limit($product->name, 15) }}</a></h4>
 									<div class="info-product-price">
 										@php
 										$getDiscountPrice = Product::getDiscountPrice($product->id);
@@ -227,14 +228,14 @@ use App\Models\Product;
 									<img src="{{asset("/storage/product_featured_images/$product->featured_image")}}" alt="" class="pro-image-back">
 										<div class="men-cart-pro">
 											<div class="inner-men-cart-pro">
-												<a href="single.html" class="link-product-add-cart">Quick View</a>
+												<a href="{{ route('single', ['category' => $product->category->slug ,'slug' => $product->slug])}}" class="link-product-add-cart">Quick View</a>
 											</div>
 										</div>
 										<span class="product-new-top">New</span>
 										
 								</div>
 								<div class="item-info-product ">
-									<h4><a href="single.html">{{$product->name}}</a></h4>
+									<h4><a href="{{ route('single', ['category' => $product->category->slug ,'slug' => $product->slug])}}">{{ Str::limit($product->name, 15) }}</a></h4>
 									<div class="info-product-price">
 										@php
 										$getDiscountPrice = Product::getDiscountPrice($product->id);
@@ -262,14 +263,14 @@ use App\Models\Product;
 									<img src="{{asset("/storage/product_featured_images/$product->featured_image")}}" alt="" class="pro-image-back">
 										<div class="men-cart-pro">
 											<div class="inner-men-cart-pro">
-												<a href="single.html" class="link-product-add-cart">Quick View</a>
+												<a href="{{ route('single', ['category' => $product->category->slug ,'slug' => $product->slug])}}" class="link-product-add-cart">Quick View</a>
 											</div>
 										</div>
 										<span class="product-new-top">New</span>
 										
 								</div>
 								<div class="item-info-product ">
-									<h4><a href="single.html">{{$product->name}}</a></h4>
+									<h4><a href="{{ route('single', ['category' => $product->category->slug ,'slug' => $product->slug])}}">{{ Str::limit($product->name, 15) }}</a></h4>
 									<div class="info-product-price">
 										@php
 										$getDiscountPrice = Product::getDiscountPrice($product->id);

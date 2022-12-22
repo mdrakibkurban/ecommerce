@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-
+@section('title','Product Attribute')
 @section('content-title') 
 <div class="row mb-2">
     <div class="col-sm-6">
@@ -41,8 +41,8 @@
            </div>
            <div class="col-md-6">
             <div class="form-group">
-              <img width="120" src="{{(!empty($row->featured_image)) ? 
-               asset("storage/product_featured_images/".$row->featured_image) : asset('/upload/extra.jpg')}}" alt="">
+              <img width="120" src="{{(!empty($product->featured_image)) ? 
+               asset("storage/product_featured_images/".$product->featured_image) : asset('/upload/extra.jpg')}}" alt="">
              </div>
             </div>
          </div>
@@ -57,8 +57,6 @@
             <input type="number" name="price[]" class="form-control" placeholder="Price"
             style="width: 110px"/>&nbsp;&nbsp;
             <input type="number" name="stock[]" class="form-control" placeholder="Stock"
-            style="width: 110px"/>&nbsp;&nbsp;
-            <input type="text" name="color[]"  class="form-control" placeholder="Color"
             style="width: 110px"/>&nbsp;&nbsp;
             <a href="javascript:void(0);" class="add_button btn btn-success btn-sm text-center" title="Add field" style="height: 37px; width:37px;">
               <i class="fas fa-plus" style="margin-top: 6px; font-size:15px"></i>
@@ -90,7 +88,6 @@
             <th>Sku</th>
             <th>Stock</th>
             <th>Price</th>
-            <th>Color</th>
             <th style="width: 100px">Action</th>
           </tr>
         </thead>
@@ -106,9 +103,6 @@
               </td>
               <td>
                 <input type="number" name="price[]" value="{{  $attribute->price }}" required>
-             </td>
-             <td>
-              <input type="text" name="color[]" value="{{  $attribute->color }}" required>
              </td>
               <td style="width: 100px">
                 <button title="Delete" class="btn btn-danger btn-sm" id="attributeDelete"
@@ -137,7 +131,7 @@
       var maxField = 10; //Input fields increment limitation
       var addButton = $('.add_button'); //Add button selector
       var wrapper = $('.field_wrapper'); //Input field wrapper
-      var fieldHTML = '<div class="d-flex" style="margin-top: 8px;"><input name="size[]" class="form-control" placeholder="Size" style="width: 110px"/>&nbsp;&nbsp;<input name="sku[]" class="form-control" placeholder="SKU" style="width: 110px"/>&nbsp;&nbsp;<input name="price[]" class="form-control" placeholder="Price" style="width: 110px"/>&nbsp;&nbsp;<input name="stock[]" class="form-control" placeholder="Stock" style="width: 110px"/>&nbsp;&nbsp;<input name="color[]" class="form-control" placeholder="Color" style="width: 110px"/>&nbsp;&nbsp;<a href="javascript:void(0);" style="height: 37px; width:37px;" class="remove_button btn btn-danger btn-sm"><i class="fas fa-trash" style="margin-top: 6px; font-size:15px"></i></a></div>'; //New input field html
+      var fieldHTML = '<div class="d-flex" style="margin-top: 8px;"><input name="size[]" class="form-control" placeholder="Size" style="width: 110px"/>&nbsp;&nbsp;<input name="sku[]" class="form-control" placeholder="SKU" style="width: 110px"/>&nbsp;&nbsp;<input name="price[]" class="form-control" placeholder="Price" style="width: 110px"/>&nbsp;&nbsp;<input name="stock[]" class="form-control" placeholder="Stock" style="width: 110px"/>&nbsp;&nbsp;<a href="javascript:void(0);" style="height: 37px; width:37px;" class="remove_button btn btn-danger btn-sm"><i class="fas fa-trash" style="margin-top: 6px; font-size:15px"></i></a></div>'; //New input field html
       var x = 1; //Initial field counter is 1
       
       //Once add button is clicked

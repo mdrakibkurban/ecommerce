@@ -24,6 +24,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class,'index']);
+Route::get('product-category/{section}/{slug}',[HomeController::class,'category'])->name('category');
+Route::get('product/{category}/{slug}',[HomeController::class,'single'])->name('single');
+Route::post('get-product-price',[HomeController::class,'getProductPrice'])->name('get-product');
 
 Route::get('/dashboard', function () {
     return view('dashboard');

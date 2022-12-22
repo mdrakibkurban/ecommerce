@@ -20,7 +20,6 @@ return new class extends Migration
             $table->double('price');
             $table->integer('stock');
             $table->string('sku');
-            $table->string('color');
             $table->timestamps();
         });
     }

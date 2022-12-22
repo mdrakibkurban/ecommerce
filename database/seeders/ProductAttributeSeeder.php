@@ -22,7 +22,6 @@ class ProductAttributeSeeder extends Seeder
                 'price'      => 100,
                 'stock'      => 10,
                 'sku'        => 'sh-s', 
-                'color'      => 'red', 
             ]);
             
             ProductAttribute::create([
@@ -31,7 +30,6 @@ class ProductAttributeSeeder extends Seeder
                 'price'      => 200,
                 'stock'      => 20,
                 'sku'        => 'sh-m', 
-                'color'      => 'black', 
             ]);
 
             ProductAttribute::create([
@@ -40,7 +38,6 @@ class ProductAttributeSeeder extends Seeder
                 'price'      => 250,
                 'stock'      => 15,
                 'sku'        => 'sh-l', 
-                'color'      => 'blue', 
             ]);
        
     }

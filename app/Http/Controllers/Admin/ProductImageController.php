@@ -18,6 +18,7 @@ class ProductImageController extends Controller
     }
 
     public function storeProductImg(Request $request){
+
        $request->validate([
            'images' => 'required',
        ]);

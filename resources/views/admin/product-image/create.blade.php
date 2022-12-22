@@ -1,5 +1,5 @@
 @extends('admin.layouts.app')
-
+@section('title','Product Image')
 @section('content-title') 
 <div class="row mb-2">
     <div class="col-sm-6">
@@ -34,6 +34,7 @@
               <form id="attributeForm" action="{{ route('admin.product-images.store')}}" method="POST"  enctype="multipart/form-data">
                 @csrf
               <div class="card-body">
+                <input type="hidden" name="product_id" value="{{ $product->id }}">
                 <div class="form-group">
                   <label>Product Name : </label>&nbsp;&nbsp;
                   {{ $product->name }} 

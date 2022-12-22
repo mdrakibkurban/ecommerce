@@ -38,7 +38,6 @@ class ProductAttributeController extends Controller
             $attribute->size       = $data['size'][$key]; 
             $attribute->price      = $data['price'][$key]; 
             $attribute->stock      = $data['stock'][$key]; 
-            $attribute->color      = $data['color'][$key];
             $attribute->save();  
            }
         }
@@ -51,7 +50,7 @@ class ProductAttributeController extends Controller
         foreach ($data['attribute_id'] as $key => $value) {
            if(!empty($value)){
               ProductAttribute::where(['id'=> $data['attribute_id'][$key]])
-              ->update(['price' => $data['price'][$key],'stock' => $data['stock'][$key],'color' => $data['color'][$key]]); 
+              ->update(['price' => $data['price'][$key],'stock' => $data['stock'][$key]]); 
            }
         }
         Toastr::success('Product attribute update successfuly', 'success', ["positionClass" => "toast-top-right",  "closeButton"=> true,   "progressBar"=> true,]);
