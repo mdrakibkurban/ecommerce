@@ -49,6 +49,7 @@ class HomeController extends Controller
     }
 
     public function single($category,$slug){
+      
         $data['product'] = Product::with('category','attributes','images')
         ->where('slug',$slug)->first();
         $data['total_stock'] = ProductAttribute::where('product_id', $data['product']->id)->sum('stock');
@@ -57,34 +58,8 @@ class HomeController extends Controller
 
 
      public function getProductPrice(Request $request){
-        $productArrtibute = ProductAttribute::where(['product_id' =>$request->id, 'size' => $request->size])->first();
-        
-        $product = Product::select('id','discount','category_id')->where('id',$request->id)
-        ->first();
-            
-        $category = Category::select('id','discount')->where('id',$product->category_id)->first();
-
-        if($product->discount > 0){
-            $final_price = $productArrtibute->price - 
-            ($productArrtibute->price * $product->discount/100);
-
-            $discount = $productArrtibute->price - $final_price;
-         }
-         else if($category->discount > 0){
-            $final_price = $productArrtibute->price - 
-            ($productArrtibute * $category->discount/100);
-            $discount = $productArrtibute->price - $final_price;
-         }else{
-            $final_price = $productArrtibute->price;
-            $discount = 0;
-         }
-
-         return response()->json([
-              'final_price'   => $final_price,
-              'discount'      => $discount,
-              'product_price' => $productArrtibute->price,
-         ]);
-
+        $getAttrDiscountPrice = Product::getAttrDiscountPrice($request->id,$request->size);
+        return response()->json($getAttrDiscountPrice);
      } 
    
 }

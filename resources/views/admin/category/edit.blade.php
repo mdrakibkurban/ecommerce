@@ -50,10 +50,6 @@
           @enderror
         </div>
 
-        <div class="form-group col-md-6">
-          <label for="discount">Category Discount(%)</label>
-          <input type="number" class="form-control" name="discount" value="{{ $category->discount }}" id="url" placeholder="Enter discount">
-        </div>
 
         <div class="form-group col-md-6">
           <label for="url">Category Url</label>
@@ -63,28 +59,6 @@
            @enderror
         </div>
 
-       
-
-        <div class="form-group col-md-6">
-          <label for="meta_title">Meta Title</label>
-          <textarea name="meta_title" id="meta_title" rows="3" class="form-control">
-            {{ $category->meta_title }}</textarea>
-        </div>
-
-        <div class="form-group col-md-6">
-          <label for="meta_description">Meta Description</label>
-          <textarea name="meta_description" id="meta_description" rows="3" class="form-control">
-            {{ $category->meta_description }}
-          </textarea>
-        </div>
-
-        <div class="form-group col-md-6">
-          <label for="meta_keyword">Meta Keyword</label>
-          <textarea name="meta_keyword" id="meta_keyword" rows="3" class="form-control">
-            {{ $category->meta_keyword }}
-          </textarea>
-        </div>
-        
         <div class="form-group col-md-6">
           <div class="row">
            <div class="col-md-6">
@@ -100,7 +74,29 @@
               asset("storage/category_images/".$category->image) : asset('/upload/extra.jpg')}}" id="showImage" style="width: 100px;">
            </div>
           </div>
-       </div>
+        </div>
+
+        <div class="form-group col-md-4">
+          <label for="meta_title">Meta Title</label>
+          <textarea name="meta_title" id="meta_title" rows="3" class="form-control">
+            {{ $category->meta_title }}</textarea>
+        </div>
+
+        <div class="form-group col-md-4">
+          <label for="meta_description">Meta Description</label>
+          <textarea name="meta_description" id="meta_description" rows="3" class="form-control">
+            {{ $category->meta_description }}
+          </textarea>
+        </div>
+
+        <div class="form-group col-md-4">
+          <label for="meta_keyword">Meta Keyword</label>
+          <textarea name="meta_keyword" id="meta_keyword" rows="3" class="form-control">
+            {{ $category->meta_keyword }}
+          </textarea>
+        </div>
+        
+        
 
         <div class="form-group col-md-6">
           <label for="status">Status</label><br>

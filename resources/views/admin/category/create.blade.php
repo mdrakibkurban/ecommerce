@@ -51,11 +51,6 @@
         </div>
 
         <div class="form-group col-md-6">
-          <label for="discount">Category Discount(%)</label>
-          <input type="number" class="form-control" name="discount" value="{{ old('discount')}}" id="url" placeholder="Enter discount">
-        </div>
-
-        <div class="form-group col-md-6">
           <label for="url">Category Url</label>
           <input type="text" class="form-control" name="url" value="{{ old('url')}}" id="url" placeholder="Enter url">
           @error('url')
@@ -65,35 +60,37 @@
 
 
         <div class="form-group col-md-6">
+          <div class="row">
+            <div class="col-md-6">
+             <label for="image">Category Image</label>
+             <input type="file" name="image" id="image" class="form-control">
+             @error('image')
+             <span style="color: red">{{ $message }}</span>
+             @enderror
+            </div>
+
+            <div class="col-md-6">
+             <img src="" id="showImage" style="width: 100px;">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group col-md-4">
           <label for="meta_title">Meta Title</label>
           <textarea name="meta_title" id="meta_title" rows="3" class="form-control"></textarea>
         </div>
 
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
           <label for="meta_description">Meta Description</label>
           <textarea name="meta_description" id="meta_description" rows="3" class="form-control"></textarea>
         </div>
 
-        <div class="form-group col-md-6">
+        <div class="form-group col-md-4">
           <label for="meta_keyword">Meta Keyword</label>
           <textarea name="meta_keyword" id="meta_keyword" rows="3" class="form-control"></textarea>
         </div>
         
-        <div class="form-group col-md-6">
-           <div class="row">
-             <div class="col-md-6">
-              <label for="image">Category Image</label>
-              <input type="file" name="image" id="image" class="form-control">
-              @error('image')
-              <span style="color: red">{{ $message }}</span>
-              @enderror
-             </div>
-
-             <div class="col-md-6">
-              <img src="" id="showImage" style="width: 100px;">
-             </div>
-           </div>
-        </div>
+       
 
         <div class="form-group col-md-6">
           <label for="status">Category Status</label><br>

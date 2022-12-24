@@ -44,8 +44,11 @@ use App\Models\Product;
 			</div>
 		</div>
 		<div class="col-md-6 single-right-left simpleCart_shelfItem animated wow slideInRight animated" data-wow-delay=".5s" style="visibility: visible; animation-delay: 0.5s; animation-name: slideInRight;">
+			   <form action="{{ route('add-to-cart')}}" method="post">
+				   @csrf
+				   <input type="hidden" name="product_id" value="{{ $product->id }}">
 					<h3>{{ $product->name }}</h3><br>
-					<div class="rating1">
+					{{-- <div class="rating1">
 						<span class="starRating">
 							<input id="rating5" type="radio" name="rating" value="5">
 							<label for="rating5">5</label>
@@ -58,7 +61,7 @@ use App\Models\Product;
 							<input id="rating1" type="radio" name="rating" value="1">
 							<label for="rating1">1</label>
 						</span>
-					</div>
+					</div> --}}
 
 					
 					<div class="occasional">
@@ -85,12 +88,11 @@ use App\Models\Product;
 
 
 					<div class="occasional">
-						<h5>Size :</h5>
+						<h5>Avialable Size :</h5>
                         @foreach($product->attributes as $size)
                         <div class="colr ert">
-							<label class="radio"><input type="radio" id="getprice" name="radio"
-								data-id={{ $product->id }}
-								data-size={{ $size->size }}>
+							<label class="radio">
+							 <input type="radio" value="{{ $size->size }}" id="getprice" name="size" data-id={{ $product->id }} data-size={{ $size->size }}>
 								<i></i>{{ $size->size }}
 							</label>
 						</div>
@@ -101,7 +103,7 @@ use App\Models\Product;
 					<div class="color-quality">
 						<div class="color-quality-right">
 							<h5>Quality :</h5>
-							<input type="number" value="1" style="width: 80px;">
+							<input type="number" name="quantity" value="1" min="1" style="width: 80px;">
 							{{-- <select id="country1" onchange="change_country(this.value)" class="frm-field required sect">
 								<option value="null">5 Qty</option>
 								<option value="null">6 Qty</option> 
@@ -112,8 +114,11 @@ use App\Models\Product;
 					</div>
                    <br>
 					<div class="occasion-cart">
-						<a href="#" class="item_add hvr-outline-out button2">Add to cart</a>
+						<button style="border: none" class="item_add hvr-outline-out button2">
+							Add to cart
+						</button>
 					</div>
+					</form>
 					
 		        </div>
 				<div class="clearfix"> </div>
@@ -186,7 +191,7 @@ use App\Models\Product;
 							</div>
 						</div>
 					</div>
-				</div>
+			</div>
 	</div>
 </div>
 <!-- //single -->
@@ -236,7 +241,7 @@ use App\Models\Product;
 				$(".getArrtibutePrice").html("<span class='item_price'>Tk."+result.final_price+"</span><del>Tk."+result.product_price+"</del>");
               }else{
 				$(".getArrtibutePrice").html('<span class="item_price">'+result.product_price+'</span>'); 
-			  }           
+			  }          
 	        },error:function(){
 				alert("Error");
 			}
@@ -246,3 +251,13 @@ use App\Models\Product;
 </script>
 @endpush
 
+@push('css')
+	<style>
+		.occasion-cart button {
+			padding: 8px 15px;
+			text-decoration: none;
+			color: #fff;
+			font-size: 16px;
+		}
+	</style>
+@endpush

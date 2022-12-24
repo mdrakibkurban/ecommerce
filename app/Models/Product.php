@@ -27,21 +27,37 @@ class Product extends Model
 
     public static function getDiscountPrice($product_id)
     {
-        $product = Product::select('price','discount','category_id')->where('id',$product_id)
+        $product = Product::select('id','price','discount')->where('id',$product_id)
         ->first();
         
-        $category = Category::select('discount')->where('id',$product->category_id)->first();
-
         if($product->discount > 0){
             $discount_price = $product->price - ($product->price * $product->discount/100);
         }
-        else if($category->discount > 0){
-            $discount_price = $product->price - ($product->price * $category->discount/100);
-        }else{
+        else{
             $discount_price = 0;
         }
 
          return $discount_price;
+    }
+
+
+    public static function getAttrDiscountPrice($product_id, $size)
+    {
+        $product = Product::select('id','discount')->where('id',$product_id)
+        ->first();
+        $productArrtibute = ProductAttribute::where(['product_id' =>$product_id, 'size' => $size])->first();
+     
+        if($product->discount > 0){
+            $final_price = $productArrtibute->price - 
+            ($productArrtibute->price * $product->discount/100);
+            $discount = $productArrtibute->price - $final_price;
+         }
+         else{
+            $final_price = $productArrtibute->price;
+            $discount    = 0;
+         }
+
+         return  array('product_price'=> $productArrtibute->price ,'final_price'=>$final_price,'discount' => $discount);
     }
 
 }

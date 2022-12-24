@@ -20,7 +20,6 @@ return new class extends Migration
             $table->string('slug');
             $table->string('image');
             $table->string('url');
-            $table->double('discount')->nullable();
             $table->text('meta_title')->nullable();
             $table->text('meta_description')->nullable();
             $table->text('meta_keyword')->nullable();

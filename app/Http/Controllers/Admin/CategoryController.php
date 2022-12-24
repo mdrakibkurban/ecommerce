@@ -68,7 +68,6 @@ class CategoryController extends Controller
             $category->section_id       = $request->section_id;
             $category->status           = $request->status;
             $category->url              = $request->url;
-            $category->discount         = $request->discount;
             $category->meta_title       = $request->meta_title;
             $category->meta_description = $request->meta_description;
             $category->meta_keyword     = $request->meta_keyword;
@@ -149,7 +148,6 @@ class CategoryController extends Controller
             $category->slug             = Str::slug($request->name);
             $category->section_id       = $request->section_id;
             $category->url              = $request->url;
-            $category->discount         = $request->discount;
             $category->meta_title       = $request->meta_title;
             $category->meta_description = $request->meta_description;
             $category->meta_keyword     = $request->meta_keyword;

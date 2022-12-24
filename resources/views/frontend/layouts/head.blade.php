@@ -13,7 +13,9 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- pignose css -->
 <link href="{{asset("/frontend/css/pignose.layerslider.css")}}" rel="stylesheet" type="text/css" media="all" />
 
-
+<!-- //for bootstrap working -->
+<link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+<link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic' rel='stylesheet' type='text/css'>
 <!-- //pignose css -->
 <link href="{{asset("/frontend/css/style.css")}}" rel="stylesheet" type="text/css" media="all" />
 <!-- js -->
@@ -23,14 +25,11 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 <script src="{{asset("/frontend/js/imagezoom.js")}}"></script>
 <script src="{{asset("/frontend/js/jquery.flexslider.js")}}"></script>
 <!-- single -->
-
 <!-- cart -->
 <script src="{{asset("/frontend/js/simpleCart.min.js")}}"></script>
 <!-- cart -->
 <!-- for bootstrap working -->
 <script type="text/javascript" src="{{asset("/frontend/js/bootstrap-3.1.1.min.js")}}"></script>
-<!-- //for bootstrap working -->
-<link href='//fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
-<link href='//fonts.googleapis.com/css?family=Lato:400,100,100italic,300,300italic,400italic,700,900,900italic,700italic' rel='stylesheet' type='text/css'>
 <script src="{{asset("/frontend/js/jquery.easing.min.js")}}"></script>
+
 

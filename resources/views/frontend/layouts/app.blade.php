@@ -2,8 +2,11 @@
 <html>
 <head>
  @include('frontend.layouts.head')
+ @stack('css')
 </head>
 <body>
+@include('sweetalert::alert')
+
 @include('frontend.layouts.header')
 @yield('content')
 @include('frontend.layouts.footer')

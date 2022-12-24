@@ -8,6 +8,7 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductAttributeController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductImageController;
+use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
@@ -27,6 +28,13 @@ Route::get('/', [HomeController::class,'index']);
 Route::get('product-category/{section}/{slug}',[HomeController::class,'category'])->name('category');
 Route::get('product/{category}/{slug}',[HomeController::class,'single'])->name('single');
 Route::post('get-product-price',[HomeController::class,'getProductPrice'])->name('get-product');
+
+Route::prefix('/cart')->group(function(){
+   Route::post('add',[CartController::class,'addCart'])->name('add-to-cart');
+   Route::get('checkout',[CartController::class,'checkout'])->name('checkout');
+   Route::get('/remove/{id}',[CartController::class,'cartRemove'])->name('remove');
+
+});
 
 Route::get('/dashboard', function () {
     return view('dashboard');
