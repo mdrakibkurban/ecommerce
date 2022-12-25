@@ -25,14 +25,18 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', [HomeController::class,'index']);
-Route::get('product-category/{section}/{slug}',[HomeController::class,'category'])->name('category');
+Route::get('product-category/{section}/{slug}',[HomeController::class,'category'])
+->name('category');
 Route::get('product/{category}/{slug}',[HomeController::class,'single'])->name('single');
-Route::post('get-product-price',[HomeController::class,'getProductPrice'])->name('get-product');
+Route::post('get-product-price',[HomeController::class,'getAttrDiscountPrice'])
+->name('get-product');
 
 Route::prefix('/cart')->group(function(){
    Route::post('add',[CartController::class,'addCart'])->name('add-to-cart');
    Route::get('checkout',[CartController::class,'checkout'])->name('checkout');
    Route::get('/remove/{id}',[CartController::class,'cartRemove'])->name('remove');
+   Route::post('/update/qty',[CartController::class,'updateCartQty'])
+   ->name('update.qty');
 
 });
 

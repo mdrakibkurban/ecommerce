@@ -270,7 +270,9 @@ use App\Models\Product;
 										
 								</div>
 								<div class="item-info-product ">
-									<h4><a href="{{ route('single', ['category' => $product->category->slug ,'slug' => $product->slug])}}">{{ Str::limit($product->name, 15) }}</a></h4>
+									<h4><a href="{{ route('single', ['category' => $product->category->slug ,'slug' => $product->slug])}}">
+										{{ Str::limit($product->name, 15) }}</a>
+									</h4>
 									<div class="info-product-price">
 										@php
 										$getDiscountPrice = Product::getDiscountPrice($product->id);

@@ -92,7 +92,8 @@ use App\Models\Product;
                         @foreach($product->attributes as $size)
                         <div class="colr ert">
 							<label class="radio">
-							 <input type="radio" value="{{ $size->size }}" id="getprice" name="size" data-id={{ $product->id }} data-size={{ $size->size }}>
+							 <input type="radio" value="{{ $size->size }}" id="getprice" name="size" data-id="{{ $product->id }}" 
+							 data-size="{{ $size->size }}">
 								<i></i>{{ $size->size }}
 							</label>
 						</div>
@@ -103,15 +104,12 @@ use App\Models\Product;
 					<div class="color-quality">
 						<div class="color-quality-right">
 							<h5>Quality :</h5>
-							<input type="number" name="quantity" value="1" min="1" style="width: 80px;">
-							{{-- <select id="country1" onchange="change_country(this.value)" class="frm-field required sect">
-								<option value="null">5 Qty</option>
-								<option value="null">6 Qty</option> 
-								<option value="null">7 Qty</option>					
-								<option value="null">10 Qty</option>								
-							</select> --}}
+							<input type="number" name="quantity" value="1" min="1" style="width: 80px; height:35px; border: 1px solid gray">
 						</div>
 					</div>
+
+					
+
                    <br>
 					<div class="occasion-cart">
 						<button style="border: none" class="item_add hvr-outline-out button2">
