@@ -25,11 +25,11 @@ use App\Models\Product;
             @endphp
             <tr class="rem1">
                 <td class="invert-closeb">
-                    <a href="{{ route('remove',$cart->id)}}">
+                    {{-- <a href="{{ route('remove',$cart->id)}}"> --}}
                         <div class="rem">
-                            <div class="close1"> </div>
+                            <div class="close1 deleteCartItem" data-cartId ="{{$cart->id}}"> </div>
                         </div>
-                    </a>
+                    {{-- </a> --}}
                 </td>
                 <td class="invert-image">
                     <a href="{{ route('single', ['category' => $cart->product->category->slug ,'slug' =>  $cart->product->slug])}}">
@@ -109,6 +109,24 @@ use App\Models\Product;
 				alert("Error");
 			}
        });
+    });
+
+     //delete cart Item
+    $(document).on("click",".deleteCartItem",function() {
+        let cart_id  = $(this).attr('data-cartId');
+        let result = confirm('Are you sure to delete this cart item?')
+        if(result){
+            $.ajax({
+			url    : "{{ route('remove') }}",
+            method : "post",
+			data   : {cart_id : cart_id},
+            success: function(result){
+                $(".checkout").html(result.view);
+	        },error:function(){
+				alert("Error");
+			}
+        });
+        }
     });
   });
 </script>

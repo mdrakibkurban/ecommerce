@@ -42,11 +42,13 @@
 <script src="https://gitcdn.github.io/bootstrap-toggle/2.2.2/js/bootstrap-toggle.min.js"></script>
 {{-- toastr.js --}}
 <script src="http://cdn.bootcss.com/toastr.js/latest/js/toastr.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <script>
   $(document).ready( function () {
       $('#myTable').DataTable();
       $('#category_id').select2();
+      $('#product_id').select2();
   });
 </script>
 

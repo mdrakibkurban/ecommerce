@@ -21,6 +21,7 @@ function hideURLbar(){ window.scrollTo(0,1); } </script>
 <!-- js -->
 <script type="text/javascript" src="{{asset("/frontend/js/jquery-2.1.4.min.js")}}"></script>
 <!-- //js -->
+<script src="{{asset("/frontend/js/jquery.validate.js")}}"></script>
 <!-- single -->
 <script src="{{asset("/frontend/js/imagezoom.js")}}"></script>
 <script src="{{asset("/frontend/js/jquery.flexslider.js")}}"></script>

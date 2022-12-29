@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdsController;
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Admin\Auth\ProfileController as AuthProfileController;
 use App\Http\Controllers\Admin\BannerController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductImageController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\HomeController;
+use App\Http\Controllers\Frontend\UserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -32,12 +34,20 @@ Route::post('get-product-price',[HomeController::class,'getAttrDiscountPrice'])
 ->name('get-product');
 
 Route::prefix('/cart')->group(function(){
-   Route::post('add',[CartController::class,'addCart'])->name('add-to-cart');
-   Route::get('checkout',[CartController::class,'checkout'])->name('checkout');
-   Route::get('/remove/{id}',[CartController::class,'cartRemove'])->name('remove');
+   Route::post('/add',[CartController::class,'addCart'])->name('add-to-cart');
+   Route::get('/checkout',[CartController::class,'checkout'])->name('checkout');
+   Route::post('/remove',[CartController::class,'cartRemove'])->name('remove');
    Route::post('/update/qty',[CartController::class,'updateCartQty'])
    ->name('update.qty');
 
+});
+
+Route::prefix('/user')->group(function(){
+    Route::get('/login-register',[UserController::class,'loginRegister'])->name('login-register');
+    Route::post('/register',[UserController::class,'register'])->name('user.register');
+    Route::post('/login',[UserController::class,'login'])->name('user.login');
+    Route::get('/logout',[UserController::class,'logout'])->name('user.logout');
+    Route::match(['get', 'post'], '/check-email', [UserController::class,'checkEmail']);
 });
 
 Route::get('/dashboard', function () {
@@ -82,6 +92,8 @@ Route::prefix('admin')->name('admin.')->middleware(['admin'])->group(function ()
     Route::delete('/product-images/delete/{id}',[ProductImageController::class,'DeleteProductImg']);
 
     Route::resource('banners', BannerController::class);
+
+    Route::resource('/ads',AdsController::class);
 });
 
 ;

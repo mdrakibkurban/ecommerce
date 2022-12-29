@@ -63,11 +63,12 @@ class CartController extends Controller
       return view('frontend.home.check-out',$data);
    }
 
-   public function cartRemove($id){
-    $cart  = Cart::find($id);
+   public function cartRemove(Request $request){
+    $cart  = Cart::find($request->cart_id);
     $cart->delete();
-    Alert::success('Success', 'Successfully remove to Cart');
-    return redirect()->route('checkout');
+    $collection = Cart::getCartItems();
+    return response()->json(['status' => true, 
+       'view' => (String)View::make('frontend.home.checkout_item')->with(compact('collection'))]);
   }
 
 

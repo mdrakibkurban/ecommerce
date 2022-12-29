@@ -82,6 +82,13 @@
             </a>
           </li>
 
+          <li class="nav-item">
+            <a href="{{ route('admin.ads.index') }}" class="nav-link {{ request()->is('*/ads*') ? 'active' : ' '}}">
+              <i class="nav-icon fas fa-th"></i>
+              <p>ADS</p>
+            </a>
+          </li>
+
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
