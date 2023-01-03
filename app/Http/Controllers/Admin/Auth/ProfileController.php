@@ -35,7 +35,7 @@ class ProfileController extends Controller
          $current_password = Auth::guard('admin')->user()->password;
          if(Hash::check($request->current_password, $current_password)){
             if(!Hash::check($request->new_pwd, $current_password)){
-              if($request->new_pwd == $request->confirm_pwd){
+              if($request->new_pwd == $request->confirm_password){
                  $admin = Admin::where('id',Auth::guard('admin')->user()->id)->first();
                  $admin->password = Hash::make($request->new_pwd);
                  $admin->save();

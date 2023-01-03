@@ -25,9 +25,10 @@ class AdminSeeder extends Seeder
         ]);
 
         User::create([
-            'name'  => 'user',
-            'email' => 'user@gmail.com',
-            'mobile'    => '01976009329',
+            'name'     => 'user',
+            'email'    => 'user@gmail.com',
+            'mobile'   => '01976009329',
+            'status'   => 0,
             'Password' => Hash::make('123456')
         ]);
     }

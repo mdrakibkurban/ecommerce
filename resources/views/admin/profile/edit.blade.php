@@ -54,7 +54,7 @@
             <div class="card-body">
               <div class="tab-content">
                 <div class="tab-pane active" id="settings">
-                  <form method="post" action="{{ route('admin.profile.update')}}" enctype="multipart/form-data">
+                  <form id="updateProfile" method="post" action="{{ route('admin.profile.update')}}" enctype="multipart/form-data">
                     @csrf
                     @method('put')
                     <div class="form-group row">
@@ -96,7 +96,7 @@
                 </div>
 
                 <div class="tab-pane" id="timeline">
-                  <form method="post" action="{{ route('admin.password.update')}}">
+                  <form id="updatePasswordForm" method="post" action="{{ route('admin.password.update')}}">
                     @csrf
                     @method('put')
                     <div class="form-group row">
@@ -119,7 +119,7 @@
                       <div class="form-group row">
                         <label for="confirm_pwd" class="col-sm-3 col-form-label">Confirm Password</label>
                         <div class="col-sm-9">
-                          <input type="password" name="confirm_pwd" class="form-control" id="confirm_pwd" placeholder="Enter Again New Password">
+                          <input type="password" name="confirm_password" class="form-control" id="confirm_password" placeholder="Enter Again New Password">
                       </div>
                       </div>
 
@@ -169,6 +169,52 @@
             });
           });
 
+          $("#updatePasswordForm").validate({
+              rules: {
+                new_pwd: {
+                  required: true,
+                  minlength: 6
+                },
+                confirm_password: {
+                  required: true,
+                  minlength: 6,
+                  equalTo: "#new_pwd"
+                },
+                
+              },
+              messages: {
+                new_pwd: {
+                  required: "Please choose a password",
+                  minlength: "Your password must be at least 6 characters long"
+                },
+
+                confirm_password: {
+                  required: "Please choose a password",
+                  minlength: "Your password must be at least 6 characters long",
+                },
+                
+                
+              }
+            });
+
+
+            
+          $("#updateProfile").validate({
+            rules: {
+                name   : "required",
+                email  : "required",
+                mobile : "required",
+                image  : "required",
+                
+              },
+              messages: {
+                name  : "Please enter your name",
+                email : "Please enter your email",
+                mobile: "Please enter your mobile",
+                image : "Please enter your image",  
+              }
+            });
+
           //image show
             $('#image').change(function(e){
                 var reader = new FileReader();
@@ -180,5 +226,14 @@
 
         });
     </script>
+@endpush
+
+@push('css')
+    <style>
+        form.cmxform label.error, label.error {
+            color: red;
+            font-style: italic;
+        }
+    </style>
 @endpush
 

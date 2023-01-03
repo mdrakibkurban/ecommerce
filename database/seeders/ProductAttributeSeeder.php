@@ -18,26 +18,26 @@ class ProductAttributeSeeder extends Seeder
     {
             ProductAttribute::create([
                 'product_id' => 1,
-                'size'       => 'small',
+                'size'       => 'SM',
                 'price'      => 100,
                 'stock'      => 10,
-                'sku'        => 'sh-s', 
+                'sku'        => 'SM-1', 
             ]);
             
             ProductAttribute::create([
                 'product_id' => 1,
-                'size'       => 'medium',
+                'size'       => 'M',
                 'price'      => 200,
                 'stock'      => 20,
-                'sku'        => 'sh-m', 
+                'sku'        => 'M-1', 
             ]);
 
             ProductAttribute::create([
                 'product_id' => 1,
-                'size'       => 'large',
+                'size'       => 'L',
                 'price'      => 250,
                 'stock'      => 15,
-                'sku'        => 'sh-l', 
+                'sku'        => 'L-l', 
             ]);
        
     }
