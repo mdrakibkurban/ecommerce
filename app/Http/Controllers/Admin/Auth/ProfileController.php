@@ -31,7 +31,11 @@ class ProfileController extends Controller
          }
      }
   
-     public function updatePassword(Request $request){
+    public function updatePassword(Request $request){
+        $request->validate([
+            'current_password' => 'required',
+            'new_pwd'          => 'required|email',
+        ]);
          $current_password = Auth::guard('admin')->user()->password;
          if(Hash::check($request->current_password, $current_password)){
             if(!Hash::check($request->new_pwd, $current_password)){
@@ -58,6 +62,10 @@ class ProfileController extends Controller
     }
   
     public function updateProfile(Request $request){
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email',
+        ]);
      $admin = Admin::where('id',Auth::guard('admin')->user()->id)->first();
       if($request->hasFile('image')){
           if ($admin->image) {

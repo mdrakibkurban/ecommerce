@@ -51,6 +51,7 @@ use App\Models\Product;
                             <div class="sign-up">
                                 <h4 style="margin-top: 5px;">Password :</h4>
                                 <input type="password" id="password" name="password" placeholder="Enter Password">
+								
                             </div>
                             <div class="sign-up">
                                 <h4 style="margin-top: 5px;">Confirm Password :</h4>
@@ -69,11 +70,11 @@ use App\Models\Product;
                             <div class="sign-in">
                                 <h4>Email :</h4>
                                 <input type="email" name="email" value="{{ old('email') }}" placeholder="Enter Email">	
+							
                             </div>
                             <div class="sign-in">
                                 <h4>Password :</h4>
                                 <input type="password" id="password" name="password" placeholder="Enter Password"><br>
-                                <a href="#">Forgot password?</a>
                             </div>
                            
                             <div class="sign-in">

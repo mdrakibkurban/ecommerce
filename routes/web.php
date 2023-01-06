@@ -4,18 +4,14 @@ use App\Http\Controllers\Admin\AdsController;
 use App\Http\Controllers\Admin\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Admin\Auth\ProfileController as AuthProfileController;
 use App\Http\Controllers\Admin\BannerController;
-use App\Http\Controllers\Admin\BookingController;
 use App\Http\Controllers\Admin\CategoryController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\ProductAttributeController;
 use App\Http\Controllers\Admin\ProductController;
 use App\Http\Controllers\Admin\ProductImageController;
-use App\Http\Controllers\Admin\RoomController;
-use App\Http\Controllers\Admin\RoomTypeController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Frontend\UserController;
-use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -46,11 +42,21 @@ Route::prefix('/cart')->group(function(){
 });
 
 Route::prefix('/user')->group(function(){
-    Route::get('/login-register',[UserController::class,'loginRegister'])->name('login-register');
+    Route::get('/login-register',[UserController::class,'loginRegister'])->name('login');
     Route::post('/register',[UserController::class,'register'])->name('user.register');
     Route::post('/login',[UserController::class,'login'])->name('user.login');
     Route::get('/logout',[UserController::class,'logout'])->name('user.logout');
     Route::match(['get', 'post'], '/check-email', [UserController::class,'checkEmail']);
+    Route::match(['get', 'post'], '/confirm/{code}', [UserController::class,'confirmAccount']);
+   
+    Route::group(['middleware' => ['auth']],function () {
+        Route::get('/account', [UserController::class, 'account'])->name('account');
+        Route::put('account/update',[UserController::class,'updateAccount'])
+        ->name('account.update');
+        Route::post('/check-current-pwd',[UserController::class,'checkCurrentPwd']);
+        Route::put('/password/update',[UserController::class,'updatePassword'])
+        ->name('password.update');
+    });
 });
 
 // Route::get('/dashboard', function () {

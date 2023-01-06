@@ -104,6 +104,7 @@ use App\Models\Product;
                 if(result.status == false){
                    alert('Product Stock is Not Available!')
                 }
+                $(".totalCartItems").html(result.totalCartItems);
 			    $(".checkout").html(result.view);
 	        },error:function(){
 				alert("Error");

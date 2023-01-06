@@ -1,5 +1,9 @@
 <?php
 
+use App\Models\Cart;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
+
 function success_response($message = '', $code = 200){
     return response()->json([
         'success' => true,
@@ -14,3 +18,15 @@ function errors_response($message = '', $code = 400){
   ],$code);
 }
 
+
+function totalCartItems(){
+   if(Auth::check()){
+      $user_id = Auth::user()->id;
+      $totalCartItems = Cart::where('user_id',$user_id)->sum('quantity');
+   }else{
+      $session_id = Session::get('session_id');
+      $totalCartItems = Cart::where('session_id',$session_id)->sum('quantity');
+   }
+
+   return $totalCartItems;
+}

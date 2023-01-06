@@ -61,12 +61,18 @@
                       <label for="name" class="col-sm-2 col-form-label">Name</label>
                       <div class="col-sm-10">
                         <input type="text" name="name" value="{{ $admin->name }}" class="form-control" id="name">
+                        @error('name')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                       </div>
                     </div>
                     <div class="form-group row">
                       <label for="email" class="col-sm-2 col-form-label">Email</label>
                       <div class="col-sm-10">
                         <input type="email" name="email" value="{{ $admin->email }}" class="form-control" id="email">
+                        @error('email')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                       </div>
                     </div>
 
@@ -104,6 +110,9 @@
                     <div class="col-sm-9">
                         <input type="password" name="current_password" class="form-control" id="current_password" placeholder="Enter Current Password">
                         <span id="checkCurrentPwd" style="font-weight: bold"></span>
+                        @error('current_password')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     </div>
@@ -111,7 +120,10 @@
                     <div class="form-group row">
                         <label for="new_pwd" class="col-sm-3 col-form-label">New Password</label>
                         <div class="col-sm-9">
-                          <input type="password" name="new_pwd" class="form-control" id="new_pwd" placeholder="Enter New Password">
+                        <input type="password" name="new_pwd" class="form-control" id="new_pwd" placeholder="Enter New Password">
+                        @error('new_pwd')
+                        <div class="alert alert-danger">{{ $message }}</div>
+                        @enderror
                     </div>
 
                     </div>
@@ -191,9 +203,7 @@
                 confirm_password: {
                   required: "Please choose a password",
                   minlength: "Your password must be at least 6 characters long",
-                },
-                
-                
+                }, 
               }
             });
 

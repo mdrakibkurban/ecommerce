@@ -37,32 +37,10 @@
 
 		<div class="col-md-3 header-right footer-bottom">
 			<ul>
-				
-				@if(Auth::check())
-				
-				<li>
-					 <a href="" class="use1">
-					  <span> ({{ Str::ucfirst(Auth::user()->name ?? '') }})</span>
-				    </a>
-				</li>
-				<li>
-					<a href="{{ route('user.logout')}}" class="logout" title="logout">
-						<i class="glyphicon glyphicon-log-out mb-3"></i>
-					</a>
-				</li>
-				@else
-				<li>
-					<a href="{{ route('login-register')}}" class="use1">
-					<span>Login</span>
-				    </a>
-				</li>
-				@endif
 				<li><a class="fb" href="#"></a></li>
 				<li><a class="twi" href="#"></a></li>
 				<li><a class="insta" href="#"></a></li>
 				<li><a class="you" href="#"></a></li>
-				
-				
 			</ul>
 		</div>
 		<div class="clearfix"></div>
@@ -119,7 +97,24 @@
 					@endforeach
 					
 					<li class="menu__item"><a class="menu__link" href="contact.html">contact</a></li>
+
 					
+
+					@if(Auth::check())
+					<li>
+						<a href="{{ route('account')}}" class="menu__link">
+						  My Account
+					   </a>
+				   </li>
+
+					<li class="menu__item">
+						<a class="menu__link" href="{{ route('user.logout')}}">Logout</a>
+					</li>
+					@else
+					<li class="menu__item"><a class="menu__link" 
+					href="{{ url('/user/login-register')}}">Login/Regiser</a></li>
+					@endif
+
 				  </ul>
 				</div>
 			  </div>
@@ -131,13 +126,10 @@
 							<h3> 
 								<div class="total">
 								<i class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>
-								<span class="simpleCart_total"></span> 
-								(<span id="simpleCart_quantity" class="simpleCart_quantity"></span> items)
+								(<span class="totalCartItems">{{ totalCartItems() }}</span> items)
 							    </div>
 							</h3>
-						</a>
-						<p><a href="javascript:;" class="simpleCart_empty">Empty Cart</a></p>
-						
+						</a>		
 			</div>	
 		</div>
 		<div class="clearfix"></div>

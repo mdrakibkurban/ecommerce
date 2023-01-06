@@ -103,16 +103,6 @@ label{
 	display:block;
 }
 
-.header-right ul li a.logout{
-	text-align: center;
-	background-color: white;
-	line-height: 32px;
-	border: 2px solid #FDA30E;
-	border-radius: 50%;
-	color: #FDA30E;
-	position: relative;
-	top : -8px!important;
-}
 
 .glyphicon .glyphicon-log-out{
 	
@@ -398,7 +388,7 @@ a.menu__link {
 }
 .box_1 {
     background: #FDA30E;
-    padding: 15px 22px;
+	padding: 24px 25px;
     text-align: center;
 }
 .box_1 h3 {
@@ -1471,7 +1461,7 @@ a.single-item{
     width: 46%;
     margin: 0 2%;
 }
-.login-right input[type="text"] , .login-right input[type="email"] ,.login-right input[type="password"] ,.login-bottom input[type="text"], .login-bottom input[type="email"] ,.login-bottom input[type="password"]{
+.login-right input[type="text"] , .login-right input[type="email"], .login-right input[type="number"] ,.login-right input[type="password"] , .login-bottom input[type="text"], .login-bottom input[type="email"] ,.login-bottom input[type="number"] ,.login-bottom input[type="password"]{
     width: 100%;
     padding: 10px;
     font-weight: normal;
@@ -1482,7 +1472,7 @@ a.single-item{
     font-size: 14px;
 	margin: 6px 0 10px 0px;
 }
-.login-right input[type="text"]:hover, .login-right input[type="email"]:hover, .login-right input[type="password"]:hover, .login-bottom input[type="text"]:hover, .login-bottom input[type="email"]:hover, .login-bottom input[type="password"]:hover{
+.login-right input[type="text"]:hover, .login-right input[type="email"]:hover, .login-right input[type="number"]:hover, .login-right input[type="password"]:hover, .login-bottom input[type="text"]:hover, .login-bottom input[type="email"]:hover, .login-bottom input[type="number"]:hover, .login-bottom input[type="password"]:hover{
     border: 1px solid #FDA30E;	
 }
 .login-right h4,.login-bottom h4 {
@@ -2817,7 +2807,7 @@ td.invert-image a img {
 }
 /*-- quantity-end --*/
 .checkout-left-basket h4{
-	padding: 1em;
+	padding: 0.7em;
     background:#FDA30E;
     font-size: 1.1em;
     color: #fff;

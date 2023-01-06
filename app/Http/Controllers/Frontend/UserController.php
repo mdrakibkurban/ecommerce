@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\ImageManagerStatic as Image;
 
 class UserController extends Controller
 {
@@ -83,6 +85,7 @@ class UserController extends Controller
                 $session_id = Session::get('session_id');
                 Cart::where('session_id',$session_id)->update(['user_id' =>  $user_id]);
             }
+           Alert::success('Success!', 'You are successfuly Login!');
            return redirect()->route('checkout');
         }else{
            Alert::error('Sorry!', 'Invalid Email or Password');
@@ -94,4 +97,104 @@ class UserController extends Controller
         Auth::logout();
         return redirect('/');
     }
+
+
+    public function confirmAccount($email){
+        Session::forget('success_message');
+        Session::forget('error_message');
+          $email = base64_decode($email);
+          $userCount = User::where('email', $email)->count();
+          if($userCount > 0){
+            $user = User::where('email', $email)->first();
+            if($user->status == 1){
+                $message = "Your email account already activated ! You can login!";
+                Session::put('error_message',$message);
+                return redirect('user/login-register');
+            }else{
+                User::where('email', $email)->update(['status' => 1]);
+                $messageData = [
+                    'email' => $user->email,
+                    'name'  => $user->name,
+               ];
+                Mail::send('frontend.emails.welcome', $messageData, function($message) use($email){
+                    $message->to($email)->subject('confirm your e-comerce account');
+               });
+   
+               $message = 'Your email account is activated ! You can login now!';
+               Session::put('success_message',$message);
+               return redirect('user/login-register');
+            }
+          }else{
+            abort(404);
+          }
+    }
+
+
+    public function account(){
+        $data['user'] = Auth::user();
+        return view('frontend.user.account',$data);
+    }
+
+    public function updateAccount(Request $request){
+        $user = User::where('id',Auth::user()->id)->first();
+         if($request->hasFile('image')){
+             if ($user->image) {
+                 Storage::delete('public/user_imags/' . $user->image);
+             }
+             $image = $request->file('image');
+             $image_ex =  $image->getClientOriginalExtension();
+             $file_path = date('ymdhis').'.'.$image_ex;
+             Image::make($image)->resize(500, 310); 
+             $image->storeAs('user_image', $file_path,'public');
+         }else{
+             $file_path =  $user->image;
+         }
+         $user->name    = $request->name;
+         $user->email   = $request->email;
+         $user->mobile  = $request->mobile;
+         $user->address = $request->address;
+         $user->image   =  $file_path;
+         $user->save();
+         Alert::success('Success!', 'User Account Update successfuly');
+         return redirect()->back();
+         }
+
+         public function checkCurrentPwd(Request $request){
+            $password = Auth::user()->password;
+            if(Hash::check($request->current_pwd,$password)){
+               return response()->json([
+                    'success' => true,
+               ]);
+            }else{
+              return response()->json([
+                 'success' => false,
+              ]);
+            }
+        }
+
+         public function updatePassword(Request $request){
+            $current_password = Auth::user()->password;
+            if(Hash::check($request->current_password, $current_password)){
+               if(!Hash::check($request->new_pwd, $current_password)){
+                 if($request->new_pwd == $request->confirm_password){
+                    $user = User::where('id',Auth::user()->id)->first();
+                    $user->password = Hash::make($request->new_pwd);
+                    $user->save();
+                    Alert::success('Success!', 'Password Update successfuly');
+                    return redirect()->back();
+                 }else{
+                  Alert::error('Sorry!', 'New password and Confirm doed not match');
+                   return redirect()->back();
+                 }
+                   
+               }else{
+                   Alert::error('Sorry!', 'New password and Current password are same');
+                   return redirect()->back();
+               }
+     
+            }else{
+               Alert::error('Sorry!', 'Current password is not match');
+               return redirect()->back();
+            }
+       }
 }

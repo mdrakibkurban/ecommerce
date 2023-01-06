@@ -82,6 +82,7 @@ class CartController extends Controller
             $collection = Cart::getCartItems();
             return response()->json([
                     'status' => false,
+                
                     'message' => 'product stock not available',
                     'view' => (String)View::make('frontend.home.checkout_item')->with(compact('collection'))
             ]);
@@ -89,7 +90,8 @@ class CartController extends Controller
 
        Cart::where('id',$request->cart_id)->update(['quantity' => $request->new_qty]);
        $collection = Cart::getCartItems();
-       return response()->json(['status' => true, 
+       $totalCartItems = totalCartItems();
+       return response()->json(['status' => true, 'totalCartItems' => $totalCartItems,
        'view' => (String)View::make('frontend.home.checkout_item')->with(compact('collection'))]);
   }
   
