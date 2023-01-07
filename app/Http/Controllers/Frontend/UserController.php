@@ -16,18 +16,25 @@ use Intervention\Image\ImageManagerStatic as Image;
 
 class UserController extends Controller
 {
-    public function loginRegister(){
-        return view('frontend.user.login-register');
+    public function create(){
+        return view('frontend.user.register');
     }
 
 
-    public function register(Request $request){
-        Session::forget('success_message');
-        Session::forget('error_message');
+    public function store(Request $request){
+
+        $request->validate([
+            'name'     => 'required',
+            'email'    => 'required|email',
+            'password' => 'required',
+            
+        ]);
+        Session::forget('r_success_message');
+        Session::forget('r_error_message');
         $checkEmail = User::where('email',$request->email)->count();
         if($checkEmail > 0){
            $message = "Email already exits";
-           Session::flash('error_message',$message);
+           Session::flash('r_error_message',$message);
            return redirect()->back();
         }else{
             $user = new User();
@@ -49,7 +56,7 @@ class UserController extends Controller
             });
 
             $message = 'Please confirm your email to activate your account !';
-            Session::put('success_message',$message);
+            Session::put('r_success_message',$message);
             return redirect()->back();
         }
       
@@ -66,9 +73,17 @@ class UserController extends Controller
         }
     }
     
-    public function login(Request $request){
-        Session::forget('success_message');
-        Session::forget('error_message');
+    public function loginCreate(){
+        return view('frontend.user.login');
+    }
+
+    public function loginStore(Request $request){
+        $request->validate([
+            'email'    => 'required|email',
+            'password' => 'required',            
+        ]);
+        Session::forget('l_success_message');
+        Session::forget('l_error_message');
         $credentails = $request->only('email','password');
         if(Auth::attempt($credentails)){
 
@@ -76,7 +91,7 @@ class UserController extends Controller
             if($userStatus->status == 0){
               Auth::logout();
               $message = " Your account is not activated yet! Please confirm your email to activate!";
-              Session::put('error_message',$message);
+              Session::put('l_error_message',$message);
               return redirect()->back();
             }
 
@@ -100,16 +115,16 @@ class UserController extends Controller
 
 
     public function confirmAccount($email){
-        Session::forget('success_message');
-        Session::forget('error_message');
+        Session::forget('l_success_message');
+        Session::forget('l_error_message');
           $email = base64_decode($email);
           $userCount = User::where('email', $email)->count();
           if($userCount > 0){
             $user = User::where('email', $email)->first();
             if($user->status == 1){
                 $message = "Your email account already activated ! You can login!";
-                Session::put('error_message',$message);
-                return redirect('user/login-register');
+                Session::put('l_error_message',$message);
+                return redirect('user/login');
             }else{
                 User::where('email', $email)->update(['status' => 1]);
                 $messageData = [
@@ -121,8 +136,8 @@ class UserController extends Controller
                });
    
                $message = 'Your email account is activated ! You can login now!';
-               Session::put('success_message',$message);
-               return redirect('user/login-register');
+               Session::put('l_success_message',$message);
+               return redirect('user/login');
             }
           }else{
             abort(404);

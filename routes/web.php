@@ -42,9 +42,10 @@ Route::prefix('/cart')->group(function(){
 });
 
 Route::prefix('/user')->group(function(){
-    Route::get('/login-register',[UserController::class,'loginRegister'])->name('login');
-    Route::post('/register',[UserController::class,'register'])->name('user.register');
-    Route::post('/login',[UserController::class,'login'])->name('user.login');
+    Route::get('/register',[UserController::class,'create']);
+    Route::post('/register',[UserController::class,'store']);
+    Route::get('/login',[UserController::class,'loginCreate'])->name('login');
+    Route::post('/login',[UserController::class,'loginStore']);
     Route::get('/logout',[UserController::class,'logout'])->name('user.logout');
     Route::match(['get', 'post'], '/check-email', [UserController::class,'checkEmail']);
     Route::match(['get', 'post'], '/confirm/{code}', [UserController::class,'confirmAccount']);

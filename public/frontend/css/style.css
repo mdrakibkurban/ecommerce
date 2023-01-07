@@ -1457,10 +1457,12 @@ a.single-item{
     padding: 15px 15px 30px;
 }
 .login-right, .login-bottom {
-    float: left;
-    width: 46%;
-    margin: 0 2%;
+    width: 45%;
+    margin: 0 auto;
 }
+
+
+
 .login-right input[type="text"] , .login-right input[type="email"], .login-right input[type="number"] ,.login-right input[type="password"] , .login-bottom input[type="text"], .login-bottom input[type="email"] ,.login-bottom input[type="number"] ,.login-bottom input[type="password"]{
     width: 100%;
     padding: 10px;
@@ -1500,6 +1502,55 @@ a.single-item{
 
     background: #FDA30E;
 }
+
+
+.account-right, .account-bottom {
+	float: left;
+    width: 46%;
+    margin: 0 2%;
+}
+
+.account-right input[type="text"] , .account-right input[type="email"], .account-right input[type="number"] ,.account-right input[type="password"] , .account-bottom input[type="text"], .account-bottom input[type="email"] ,.account-bottom input[type="number"] ,.account-bottom input[type="password"]{
+    width: 100%;
+    padding: 10px;
+    font-weight: normal;
+    background: none;
+    border: 1px solid #E6E4E4;
+    /* color: #D2D1D1; */
+    outline: none;
+    font-size: 14px;
+	margin: 6px 0 10px 0px;
+}
+.account-right input[type="text"]:hover, .account-right input[type="email"]:hover, .account-right input[type="number"]:hover, .account-right input[type="password"]:hover, .account-bottom input[type="text"]:hover, .account-bottom input[type="email"]:hover, .account-bottom input[type="number"]:hover, .account-bottom input[type="password"]:hover{
+    border: 1px solid #FDA30E;	
+}
+.account-right h4,.account-bottom h4 {
+    color: #000000;
+    font-size: 14px;
+    margin: 0 0 0px 0;
+	font-family: 'Lato', sans-serif;
+}
+
+.account-right input[type="submit"],.account-bottom input[type="submit"]{
+	background:#7B7B7B;
+    color: #fff;
+    font-size: 17px;
+    border: none;
+    width: 100%;
+    outline: none;
+    -webkit-appearance: none;
+    padding: 8px 15px 9px 15px;
+    transition: 0.5s all;
+    -webkit-transition: 0.5s all;
+    -moz-transition: 0.5s all;
+    -o-transition: 0.5s all;
+}
+.account-right input[type="submit"]:hover,.account-bottom input[type="submit"]:hover {
+
+    background: #FDA30E;
+}
+
+
 .modal-dialog {
     width: 750px;
     margin: 30px auto;
@@ -1508,6 +1559,12 @@ a.single-item{
     border-bottom: none;
 }
 .login-right h3 ,.login-bottom h3{
+    color: #FDA30E;
+    font-size: 22px;
+    margin-bottom: 23px;
+}
+
+.account-right h3 ,.account-bottom h3{
     color: #FDA30E;
     font-size: 22px;
     margin-bottom: 23px;

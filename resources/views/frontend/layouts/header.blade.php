@@ -112,7 +112,9 @@
 					</li>
 					@else
 					<li class="menu__item"><a class="menu__link" 
-					href="{{ url('/user/login-register')}}">Login/Regiser</a></li>
+					href="{{ url('/user/login')}}">Login</a></li>
+					<li class="menu__item"><a class="menu__link" 
+					href="{{ url('/user/register')}}">Register</a></li>
 					@endif
 
 				  </ul>
@@ -126,6 +128,7 @@
 							<h3> 
 								<div class="total">
 								<i class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></i>
+								<span class="totalCartAmount">Tk. {{ totalCartAmount()}}</span>
 								(<span class="totalCartItems">{{ totalCartItems() }}</span> items)
 							    </div>
 							</h3>

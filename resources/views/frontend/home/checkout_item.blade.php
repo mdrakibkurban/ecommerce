@@ -74,6 +74,7 @@ use App\Models\Product;
                     <li style="color: black; font-weight:bolder;font-size:15px;"> Grand Total <i>-</i> <span>Tk .{{ $total_price }}</span></li>
                 </ul>
             </div>
+          
             <div class="clearfix"> </div>
         </div>
 </div>
@@ -89,7 +90,9 @@ use App\Models\Product;
 		if($(this).hasClass('value-minus')){
 			let cart_qty  = $(this).attr('data-qty');
 			if(cart_qty <=1 ){
+                alert('product quantity minimum value 1!');
 				return false;
+               
 			}
 		    new_qty = parseInt(cart_qty) - 1;
 		}
@@ -105,6 +108,7 @@ use App\Models\Product;
                    alert('Product Stock is Not Available!')
                 }
                 $(".totalCartItems").html(result.totalCartItems);
+                $(".totalCartAmount").html(result.totalCartAmount);
 			    $(".checkout").html(result.view);
 	        },error:function(){
 				alert("Error");
@@ -122,6 +126,8 @@ use App\Models\Product;
             method : "post",
 			data   : {cart_id : cart_id},
             success: function(result){
+                $(".totalCartItems").html(result.totalCartItems);
+                $(".totalCartAmount").html(result.totalCartAmount);
                 $(".checkout").html(result.view);
 	        },error:function(){
 				alert("Error");

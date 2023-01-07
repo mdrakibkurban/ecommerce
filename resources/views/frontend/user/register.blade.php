@@ -2,7 +2,7 @@
 use App\Models\Product;
 ?>
 @extends('frontend.layouts.app')
-@section('title','Login Register')
+@section('title','Register')
 @section('content')
 <!-- banner -->
 <div class="page-head">
@@ -14,44 +14,50 @@ use App\Models\Product;
 <!-- typography -->
 <div class="typrography">
 	 <div class="container">	
-		<div class="grid_3 grid_4 wow fadeInLeft animated" data-wow-delay=".5s">
+		<div class="grid_3 grid_4 wow fadeInLeft animated justify-center" data-wow-delay=".5s">
 		    <div class="login-grids">
                 <div class="login">
-
-				   @if (Session::has('success_message'))
-				   <div class="alert alert-success" role="alert">
-						{{Session::get('success_message')}}
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-						  <span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					@endif
-
-					@if (Session::has('error_message'))
-					<div class="alert alert-danger" role="alert">
-						{{Session::get('error_message')}}
-						<button type="button" class="close" data-dismiss="alert" aria-label="Close">
-						  <span aria-hidden="true">&times;</span>
-						</button>
-					</div>
-					@endif
                     <div class="login-bottom">
-                        <h3>Sign Up</h3>
-                        <form id="registerForm" action="{{ route('user.register')}}" method="post">
+						@if (Session::has('r_success_message'))
+						<div class="alert alert-success" role="alert">
+							 {{Session::get('r_success_message')}}
+							 <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							   <span aria-hidden="true">&times;</span>
+							 </button>
+						 </div>
+						 @endif
+						@if (Session::has('r_error_message'))
+						<div class="alert alert-danger" role="alert">
+							{{Session::get('r_error_message')}}
+							<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+							<span aria-hidden="true">&times;</span>
+							</button>
+						</div>
+						@endif
+                        <h3 style="text-align:center; font-size:30px;">Register</h3>
+                        <form id="registerForm" action="{{ url('/user/register') }}" method="post">
                             @csrf
                             <div class="sign-up">
                                 <h4 style="margin-top: 5px;">Name :</h4>
                                 <input type="text"  class="@error('name') is-invalid @enderror" name="name" id="name" value="{{ old('name') }}" placeholder="Enter Name">	
+								@error('name')
+								<span style="color: red">{{ $message }}</span>
+							    @enderror
                             </div>
 
                             <div class="sign-up">
                                 <h4 style="margin-top: 5px;">Email :</h4>
                                 <input type="email" id="email" class="@error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" placeholder="Enter Email">
+								@error('email')
+								<span style="color: red">{{ $message }}</span>
+							    @enderror
                             </div>
                             <div class="sign-up">
                                 <h4 style="margin-top: 5px;">Password :</h4>
                                 <input type="password" id="password" name="password" placeholder="Enter Password">
-								
+								@error('password')
+								<span style="color: red">{{ $message }}</span>
+							    @enderror
                             </div>
                             <div class="sign-up">
                                 <h4 style="margin-top: 5px;">Confirm Password :</h4>
@@ -61,25 +67,6 @@ use App\Models\Product;
                                 <input type="submit" value="REGISTER NOW" >
                             </div>
                             
-                        </form>
-                    </div>
-                    <div class="login-right">
-                        <h3>Sign In </h3>
-                        <form id="loginForm" action="{{ route('user.login') }}" method="post">
-                            @csrf
-                            <div class="sign-in">
-                                <h4>Email :</h4>
-                                <input type="email" name="email" value="{{ old('email') }}" placeholder="Enter Email">	
-							
-                            </div>
-                            <div class="sign-in">
-                                <h4>Password :</h4>
-                                <input type="password" id="password" name="password" placeholder="Enter Password"><br>
-                            </div>
-                           
-                            <div class="sign-in">
-                                <input type="submit" value="SIGNIN" >
-                            </div>
                         </form>
                     </div>
                     <div class="clearfix"></div>
@@ -120,6 +107,8 @@ use App\Models\Product;
 		</div>
 	</div>
 </div>
+
+
 
 @endsection
 
@@ -162,34 +151,6 @@ use App\Models\Product;
 					required: "Please choose a password",
 					minlength: "Your password must be at least 6 characters long",
 				},
-				
-			}
-		});
-
-
-        $("#loginForm").validate({
-			rules: {
-                email: {
-					required: true,
-					email: true,
-				},
-
-				password: {
-					required: true,
-					minlength: 6
-				},
-				
-			},
-			messages: {
-				email: {
-					required: "Please enter your email",
-					email: "Please enter a valid email address",
-				},
-				password: {
-					required: "Please choose a password",
-					minlength: "Your password must be at least 6 characters long"
-				},
-				
 				
 			}
 		});

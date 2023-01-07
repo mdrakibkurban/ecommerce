@@ -58,7 +58,7 @@
 			</div>
 		</div>
 		<div class="clearfix"></div>
-		<p class="copy-right">&copy 2016 Smart Shop. All rights reserved | Design by <a href="http://w3layouts.com/">W3layouts</a></p>
+		<p class="copy-right">&copy 2023 Smart Shop. All rights reserved</p>
 	</div>
 </div>
 <!-- //footer -->

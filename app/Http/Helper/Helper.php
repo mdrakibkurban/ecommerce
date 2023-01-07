@@ -1,6 +1,7 @@
 <?php
 
 use App\Models\Cart;
+use App\Models\Product;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -29,4 +30,29 @@ function totalCartItems(){
    }
 
    return $totalCartItems;
+}
+
+
+
+function totalCartAmount(){
+   if(Auth::check()){
+      $user_id = Auth::user()->id;
+      $totalCart = Cart::where('user_id',$user_id)->get();
+      $total_price = 0;
+      foreach($totalCart as $cart){
+         $getAttrDiscountPrice = Product::getAttrDiscountPrice($cart->product_id,$cart->size);
+         $total_price = $total_price + ($getAttrDiscountPrice['final_price'] * $cart->quantity); 
+      }
+
+   }else{
+      $session_id = Session::get('session_id');
+      $totalCart = Cart::where('session_id',$session_id)->get();
+      $total_price = 0;
+      foreach($totalCart as $cart){
+         $getAttrDiscountPrice = Product::getAttrDiscountPrice($cart->product_id,$cart->size);
+         $total_price = $total_price + ($getAttrDiscountPrice['final_price'] * $cart->quantity); 
+     }
+   }
+
+   return  $total_price;
 }

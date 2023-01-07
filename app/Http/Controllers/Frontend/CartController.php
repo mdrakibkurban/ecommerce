@@ -67,8 +67,11 @@ class CartController extends Controller
     $cart  = Cart::find($request->cart_id);
     $cart->delete();
     $collection = Cart::getCartItems();
-    return response()->json(['status' => true, 
-       'view' => (String)View::make('frontend.home.checkout_item')->with(compact('collection'))]);
+    $totalCartItems = totalCartItems();
+    $totalCartAmount = totalCartAmount();
+    return response()->json(['status' => true, 'totalCartItems' => $totalCartItems, 
+    'totalCartAmount' => $totalCartAmount,
+    'view' => (String)View::make('frontend.home.checkout_item')->with(compact('collection'))]);
   }
 
 
@@ -82,7 +85,6 @@ class CartController extends Controller
             $collection = Cart::getCartItems();
             return response()->json([
                     'status' => false,
-                
                     'message' => 'product stock not available',
                     'view' => (String)View::make('frontend.home.checkout_item')->with(compact('collection'))
             ]);
@@ -91,7 +93,9 @@ class CartController extends Controller
        Cart::where('id',$request->cart_id)->update(['quantity' => $request->new_qty]);
        $collection = Cart::getCartItems();
        $totalCartItems = totalCartItems();
-       return response()->json(['status' => true, 'totalCartItems' => $totalCartItems,
+       $totalCartAmount = totalCartAmount();
+       return response()->json(['status' => true, 'totalCartItems' => $totalCartItems, 
+       'totalCartAmount' => $totalCartAmount,
        'view' => (String)View::make('frontend.home.checkout_item')->with(compact('collection'))]);
   }
   

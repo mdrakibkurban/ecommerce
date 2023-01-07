@@ -17,7 +17,7 @@ use App\Models\Product;
 		<div class="grid_3 grid_4 wow fadeInLeft animated" data-wow-delay=".5s">
 		    <div class="login-grids">
                 <div class="login">
-                    <div class="login-bottom">
+                    <div class="account-bottom">
                         <h3>Contact Details</h3>
                         <form id="contactDetails" action="{{ route('account.update')}}" method="post" enctype="multipart/form-data">
                             @csrf
@@ -60,7 +60,7 @@ use App\Models\Product;
                             
                         </form>
                     </div>
-                    <div class="login-right">
+                    <div class="account-right">
                         <h3>Update Password </h3>
                         <form id="updatePassword" action="{{ route('password.update')}}" method="post">
                             @csrf
@@ -178,6 +178,9 @@ use App\Models\Product;
 
           $("#updatePassword").validate({
               rules: {
+                current_password: {
+                  required: true,
+                },
                 new_pwd: {
                   required: true,
                   minlength: 6
@@ -190,6 +193,10 @@ use App\Models\Product;
                 
               },
               messages: {
+                current_password: {
+                  required: "Please choose a password",
+                },
+
                 new_pwd: {
                   required: "Please choose a password",
                   minlength: "Your password must be at least 6 characters long"

@@ -57,9 +57,9 @@ class HomeController extends Controller
     }
 
 
-     public function getAttrDiscountPrice(Request $request){
+    public function getAttrDiscountPrice(Request $request){
         $getAttrDiscountPrice = Product::getAttrDiscountPrice($request->id,$request->size);
         return response()->json($getAttrDiscountPrice);
-     } 
+    } 
    
 }
